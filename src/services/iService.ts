@@ -12,8 +12,8 @@ export	interface IService<T> {
 		listFilter?(slug:string): Promise<T[]>;
 }
 export interface IServiceAuth{
-		axios: AxiosInstance;
-		login(username: string,password: string):Promise<IUserAuth>;
-		getData():Promise<IUser>;
-		signUp(data:IUser):Promise<IUserAuth>;
+  axios: AxiosInstance;
+  login(username: string,password: string):Promise<IUserAuth>;
+  getData():Promise<IUser>;
+  signUp(data:IUser):Promise<IUserAuth>;
 }

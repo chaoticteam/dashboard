@@ -5,8 +5,8 @@ interface ISetUserAction {
 	payload: IUser;
 }
 interface ISetAxiosAction {
-	type: "SET_AXIOS_INSTANCE";
-	payload: AxiosInstance;
+	type: "SET_AXIOS_TOKEN";
+	payload: string;
 }
 interface ISetStatusAction {
 	type: "SET_STATUS_INSTANCE";

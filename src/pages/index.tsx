@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useAuth } from "@/hooks";
-
-export default function Home() {
+import { useEffect } from "react";
+export default function Home(){
   const {state} = useAuth();
   return (
     <>

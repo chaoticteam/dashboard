@@ -4,8 +4,8 @@ import axios, { AxiosInstance } from "axios";
 
 export class authService implements IServiceAuth{
 	axios: AxiosInstance;
-	constructor(axiosInstance?:AxiosInstance){
-			this.axios = axiosInstance || axios.create()
+	constructor(axiosInstance:AxiosInstance){
+		this.axios = axiosInstance
 	}
 	async login(username: string, password: string): Promise<IUserAuth> {
 		const response = await this.axios.post(`/auth/login`,{

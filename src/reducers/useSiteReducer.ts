@@ -21,14 +21,20 @@ export const reducer = (state: IContextState, action:IAction ): IContextState =>
 				status: "loaded",
 				user : action.payload,
 			};
-		case "SET_AXIOS_INSTANCE":
+		case "SET_AXIOS_TOKEN":
+      state.axiosInstance.interceptors.request.use(config=>{
+        if (config.headers)
+          config.headers.Authorization =	action.payload ? `Bearer ${action.payload}` : ''
+        return config
+      })
 			return {
 				...state,
-				axiosInstance : action.payload,
+				axiosInstance: state.axiosInstance,
 			};
     case "SET_STATUS_INSTANCE":
       return {
         ...state,
+        user:undefined,
         status:action.payload
       }
 		default:

@@ -11,56 +11,58 @@ const { publicRuntimeConfig } = getConfig();
 const API_URL = publicRuntimeConfig.API_URL;
 
 export const useAuth = () => {
-  const {isReady} =useRouter();
+  const router =useRouter();
 	const {state,dispatch} = useContext(context);
-	const authService	= useRef<AuthService>(new AuthService(state.axiosInstance)).current;
+  const authService	= useRef(new AuthService(state.axiosInstance)).current;
+
 
 	const login= useCallback(async ({username,password}:{username: string,password: string})=>{
 		if (!dispatch) return
+    dispatch({type:"SET_STATUS_INSTANCE",payload:"loading"});
 		try{
-			const resp = await authService.login(username,password);
-			dispatch({type:"SET_USER",payload:resp.user})
-			localStorage.setItem("access_token",resp.token)
+			const {user,token} = await authService.login(username,password);
+      dispatch({type:"SET_AXIOS_TOKEN",payload:token||""})
+			dispatch({type:"SET_USER",payload:user})
+			localStorage.setItem("access_token",token)
+      router.push("/");
 		}catch(error){
       dispatch({type:"SET_STATUS_INSTANCE",payload:"error"});
+      throw `Error Login user: ${username},\n ${error}`
 		}
 	},[])
 	const signUp= useCallback(async (data: IUser)=>{
-    if (!dispatch) return
+    if (!dispatch)  return
+    dispatch({type:"SET_STATUS_INSTANCE",payload:"loading"});
 		try{
-			const resp = await authService.signUp(data);
-			dispatch({type:"SET_USER",payload:resp.user})
-			localStorage.setItem("access_token",resp.token)
+      const {user,token} = await authService.signUp(data);
+      dispatch({type:"SET_AXIOS_TOKEN",payload:token||""})
+			dispatch({type:"SET_USER",payload:user})
+			localStorage.setItem("access_token",token)
+      router.push("/")
 		}catch(error){
       dispatch({type:"SET_STATUS_INSTANCE",payload:"error"});
+      throw `Error SignUp user: ${data.userName}`
 		}
 	},[])
 	const getUserData= useCallback(async ()=>{
-		if (!dispatch) return
-      authService.getData().then(resp=>{
-        dispatch({type:"SET_USER",payload:resp})
-				return (resp)
-			}).catch(error=>{
-        throw "Get User Data"
-			}).finally(()=>{
-        dispatch({type:"SET_STATUS_INSTANCE",payload:"loaded"})
-      })
+    if (!dispatch)  return
+    try {
+      const data =await authService.getData()
+      dispatch({type:"SET_USER",payload:data});
+    } catch (error) {
+      dispatch({type:"SET_STATUS_INSTANCE",payload:"error"});
+    }
 	},[])
-	useEffect(()=>{
-		if (!dispatch) return
+  useEffect(()=>{
     const token = localStorage.getItem("access_token");
-    dispatch({type:"SET_AXIOS_INSTANCE",payload:axios.create({
-      baseURL:API_URL,
-      headers:{
-        Authorization:token?`Bearer ${token}`:"",
-        Accept:'application/json',
-        'Content-Type':'application/json',
-      }
-    })})
-		token && getUserData();
-	},[getUserData,isReady])
+    dispatch && token && dispatch({type:"SET_AXIOS_TOKEN",payload:token})
+    getUserData()
+    if (state.status == "loaded") router.push("/")
+    if (state.status == "error") router.push("/login")
+  },[])
 	return {
     state,
+    getUserData,
     login,
     signUp,
 	}}
