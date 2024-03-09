@@ -6,7 +6,6 @@ const nextConfig = {
 		API_URL: process.env.API_URL,
 		BASE_URL: process.env.BASE_URL || "",
 	},
-	distDir:"build",
   output: 'export',
 	trailingSlash: true,
 	skipTrailingSlashRedirect: true,

@@ -23,7 +23,7 @@ export default function LoginPage(){
       <div className='panel'>
         <div style={{
               backgroundImage:"url(https://res.cloudinary.com/dd7jrtxu5/image/upload/v1696992603/login_svg.svg)",
-              height:"100%",
+              height:"10rem",
               width:"100%",
               backgroundSize:"contain",
               backgroundRepeat:"no-repeat",
