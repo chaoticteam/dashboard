@@ -39,7 +39,7 @@
     GIT_DEPTH: 0
     IGNORE_NORMALISATION_GIT_HEAD_MOVE: 1
     API_URL: https://api.chaoticteam.com
-    BASE_URL: http://dash.chaoticteam.com
+    BASE_URL: http://portfolio.chaoticteam.com
 
   jobs:
     calculate-version:
@@ -100,31 +100,32 @@
               ${{ runner.os }}-yarn-
         - uses: actions/cache@v3
           with:
-            # Generate a new cache whenever packages or source files change.
-            path: ${{ github.workspace }}/build/cache/
-            key: ${{ runner.os }}-nextjs-${{ hashFiles('./yarn.lock') }}-${{ hashFiles('**/**/*.ts', '**/**/*.tsx') }}
-            # If source files changed but packages didn't, rebuild from a prior cache.
-            restore-keys: |
+            path: |
+              ${{ github.workspace }}/build/cache
+              # Generate a new cache whenever packages or source files change.
+              key: ${{ runner.os }}-nextjs-${{ hashFiles('./yarn.lock') }}-${{ hashFiles('**/**/*.ts', '**/**/*.tsx') }}
+              # If source files changed but packages didn't, rebuild from a prior cache.
+              restore-keys: |
               ${{ runner.os }}-nextjs-${{ hashFiles('./yarn.lock') }}-
         - name: Build portafolio
           run: |
             echo "build image"
             yarn version --no-git-tag-version --new-version  "${{ needs.calculate-version.outputs.MajorMinorPatch }}"
             yarn
-            yarn build
-        - name: Upload artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            path: ./out
+            yarn build && ls -la
+    #     - name: Upload artifact
+    #       uses: actions/upload-pages-artifact@v3
+    #       with:
+    #         path: ./build
 
-    # Deployment job
-    deploy:
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+    # # Deployment job
+    # deploy:
+    #   environment:
+    #     name: github-pages
+    #     url: ${{ steps.deployment.outputs.page_url }}
+    #   runs-on: ubuntu-latest
+    #   needs: build
+    #   steps:
+    #     - name: Deploy to GitHub Pages
+    #       id: deployment
+    #       uses: actions/deploy-pages@v4
