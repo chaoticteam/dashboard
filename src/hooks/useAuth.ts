@@ -42,7 +42,6 @@ export const useAuth = () => {
     try {
       const data =await authService.getData()
       dispatch({type:"SET_USER",payload:data});
-      router.push("/")
     } catch (error) {
       UnAuthhorized();
     }
@@ -52,7 +51,9 @@ export const useAuth = () => {
     router.push("/login");
   },[])
   useEffect(()=>{
-    console.log("hello")
+    router.push("/")
+  },[])
+  useEffect(()=>{
     if (!state.token){
       const token = localStorage.getItem("access_token");
       if (!token){
