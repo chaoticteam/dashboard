@@ -113,11 +113,10 @@
             yarn version --no-git-tag-version --new-version  "${{ needs.calculate-version.outputs.MajorMinorPatch }}"
             yarn
             yarn build
-            ls -la out
         - name: Upload artifact
           uses: actions/upload-pages-artifact@v3
           with:
-            path: ./build
+            path: ./out
 
     # Deployment job
     deploy:
