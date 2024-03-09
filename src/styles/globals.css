@@ -167,7 +167,6 @@ h5{
 p {
 	font-size: 1rem;
 	font-weight: normal;
-	text-align: center;
 	margin: 0;
 }
 
@@ -203,3 +202,33 @@ p {
   border-radius: 9999px;
   background-image: radial-gradient(circle 400px at 50% 300px,#fbfbfb36,#000);
 } */
+
+.content{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  margin: 15vh 15vw;
+  padding: 0rem 2rem;
+  box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.9);
+  width: 70vw;
+  height: 70vh;
+}
+.panel{
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 870px) {
+  .content{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    margin: 0;
+    padding: auto;
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+  .panel{
+    display: none;
+  }
+}

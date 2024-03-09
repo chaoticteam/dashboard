@@ -9,32 +9,30 @@ interface IProps{
 }
 export function Layout({children}:IProps){
   const {state} = useAuth();
-  switch (state.status){
-    case "loaded":
-      return (
-        <div className="layout">
-          <NavBar user={state.user} />
-          {children}
-          <Footer />
+  if (!!state.user){
+    return (
+      <div className="layout">
+        <NavBar user={state.user} />
+        {children}
+        <Footer />
+      </div>
+    )
+  }
+  if (state.status == "loading"){
+    return (
+      <div className="layout">
+          <PacmanLoader />
+          <style jsx>{`
+          .layout{
+            grid-template-rows: 1fr;
+          }
+          `}</style>
         </div>
       )
-    case "loading":
-      return (
-        <div className="layout">
-            <PacmanLoader />
-            <style jsx>{`
-            .layout{
-              grid-template-rows: 1fr;
-            }
-            `}</style>
-          </div>
-        )
-      default:
-        return (
-          <div className="layout">
-            {children}
-          </div>
-        )
-    }
-
+  }
+  return (
+    <div className="layout">
+      {children}
+    </div>
+  )
 }

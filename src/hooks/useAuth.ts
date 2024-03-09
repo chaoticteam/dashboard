@@ -45,7 +45,7 @@ export const useAuth = () => {
 		}
 	},[])
 	const getUserData= useCallback(async ()=>{
-    if (!dispatch)  return
+    if (!dispatch || !!state.user)  return
     try {
       const data =await authService.getData()
       dispatch({type:"SET_USER",payload:data});
@@ -58,11 +58,10 @@ export const useAuth = () => {
     dispatch && token && dispatch({type:"SET_AXIOS_TOKEN",payload:token})
     getUserData()
     if (state.status == "loaded") router.push("/")
-    if (state.status == "error") router.push("/login")
+    if (state.status == "error" && router.pathname != "/signup") router.push("/login")
   },[])
 	return {
     state,
-    getUserData,
     login,
     signUp,
 	}}

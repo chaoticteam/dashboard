@@ -6,6 +6,9 @@ export interface IUser {
 	verified: boolean;
   profile: Profile
 }
+export interface IUserSignup extends IUser{
+  confirmPassword: string;
+}
 
 export interface Profile {
 	firstName: string;
