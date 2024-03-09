@@ -13,6 +13,10 @@ export const useAuth = () => {
   const router =useRouter();
 	const {state,dispatch} = useContext(context);
   const authService	= useRef(new AuthService(state.axiosInstance)).current;
+  const UnAuthhorized = useCallback(()=>{
+    dispatch && dispatch({type:"SET_STATUS_INSTANCE",payload:"error"});
+    router.push("/login");
+  },[dispatch,router])
 	const login= useCallback(async ({username,password}:{username: string,password: string})=>{
 		if (!dispatch) return
     dispatch({type:"SET_STATUS_INSTANCE",payload:"loading"});
@@ -24,7 +28,7 @@ export const useAuth = () => {
 		}catch(error){
       UnAuthhorized()
 		}
-	},[])
+	},[UnAuthhorized,authService,dispatch])
 	const signUp= useCallback(async (data: IUser)=>{
     if (!dispatch)  return
     dispatch({type:"SET_STATUS_INSTANCE",payload:"loading"});
@@ -36,7 +40,7 @@ export const useAuth = () => {
 		}catch(error){
       UnAuthhorized()
 		}
-	},[])
+	},[UnAuthhorized,authService,dispatch])
 	const getUserData= useCallback(async ()=>{
     if (!dispatch || !!state.user)  return
     try {
@@ -45,14 +49,7 @@ export const useAuth = () => {
     } catch (error) {
       UnAuthhorized();
     }
-	},[])
-  const UnAuthhorized = useCallback(()=>{
-    dispatch && dispatch({type:"SET_STATUS_INSTANCE",payload:"error"});
-    router.push("/login");
-  },[])
-  useEffect(()=>{
-    router.push("/")
-  },[])
+	},[UnAuthhorized,authService,dispatch,state.user])
   useEffect(()=>{
     if (!state.token){
       const token = localStorage.getItem("access_token");
@@ -65,7 +62,7 @@ export const useAuth = () => {
     }else{
       getUserData()
     }
-  },[state.token])
+  },[state.token,dispatch,getUserData,router])
 	return {
     state,
     login,

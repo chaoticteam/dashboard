@@ -17,7 +17,7 @@ export default function LoginPage(){
     } catch (error) {
       console.log("failed login")
     }
-  },[])
+  },[login,router])
   return (
     <div className='content'>
       <div className='panel'>

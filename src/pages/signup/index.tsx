@@ -15,7 +15,7 @@ export default function SignUp() {
     } catch (error) {
       console.log("failed signup")
     }
-  },[])
+  },[signUp,router])
 	return (
     <div className='content'>
       <div className='panel'>
