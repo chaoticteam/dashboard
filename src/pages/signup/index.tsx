@@ -3,11 +3,18 @@ import Form from 'form-with-state';
 import { useAuth } from '@/hooks';
 import { IUserSignup } from '@/models';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function SignUp() {
+  const router = useRouter()
 	const {signUp} = useAuth()
   const handleClick = useCallback(async (data:IUserSignup)=>{
-    signUp(data)
+    try {
+      await signUp(data)
+      router.push("/")
+    } catch (error) {
+      console.log("failed signup")
+    }
   },[])
 	return (
     <div className='content'>

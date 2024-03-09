@@ -11,7 +11,12 @@ export default function LoginPage(){
   const router = useRouter()
   const {login} = useAuth();
   const handleClick = useCallback(async (data:IUser)=>{
-    login(data)
+    try {
+      await login(data)
+      router.push("/")
+    } catch (error) {
+      console.log("failed login")
+    }
   },[])
   return (
     <div className='content'>

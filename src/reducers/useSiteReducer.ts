@@ -21,7 +21,7 @@ export const reducer = (state: IContextState, action:IAction ): IContextState =>
 				status: "loaded",
 				user : action.payload,
 			};
-		case "SET_AXIOS_TOKEN":
+		case "SET_TOKEN":
       state.axiosInstance.interceptors.request.use(config=>{
         if (config.headers)
           config.headers.Authorization =	action.payload ? `Bearer ${action.payload}` : ''
@@ -29,6 +29,7 @@ export const reducer = (state: IContextState, action:IAction ): IContextState =>
       })
 			return {
 				...state,
+        token:action.payload,
 				axiosInstance: state.axiosInstance,
 			};
     case "SET_STATUS_INSTANCE":

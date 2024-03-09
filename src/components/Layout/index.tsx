@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import NavBar from "../NavBar";
 import { Footer, PacmanLoader } from "..";
 import { useAuth } from "@/hooks";
@@ -9,15 +9,6 @@ interface IProps{
 }
 export function Layout({children}:IProps){
   const {state} = useAuth();
-  if (!!state.user){
-    return (
-      <div className="layout">
-        <NavBar user={state.user} />
-        {children}
-        <Footer />
-      </div>
-    )
-  }
   if (state.status == "loading"){
     return (
       <div className="layout">
@@ -29,6 +20,15 @@ export function Layout({children}:IProps){
           `}</style>
         </div>
       )
+  }
+  if (state.status == "loaded"){
+    return (
+      <div className="layout">
+        <NavBar user={state.user} />
+        {children}
+        <Footer />
+      </div>
+    )
   }
   return (
     <div className="layout">

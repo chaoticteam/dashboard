@@ -5,7 +5,7 @@ interface ISetUserAction {
 	payload: IUser;
 }
 interface ISetAxiosAction {
-	type: "SET_AXIOS_TOKEN";
+	type: "SET_TOKEN";
 	payload: string;
 }
 interface ISetStatusAction {
