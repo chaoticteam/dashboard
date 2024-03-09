@@ -10,4 +10,4 @@ const nextConfig = {
 	trailingSlash: true,
 	skipTrailingSlashRedirect: true,
 };
-export default nextConfig;
+module.exports = nextConfig;
