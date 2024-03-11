@@ -1,7 +1,6 @@
 import React	from "react";
-import { IContextState as State, IUser } from "@/models/user";
+import { IContextState as State} from "@/models/user";
 import IAction from "@/reducers/types";
-import axios from "axios";
 import getConfig from "next/config";
 
 const {publicRuntimeConfig}= getConfig();
@@ -11,12 +10,6 @@ interface IContextState{
 		state: State;
 		dispatch?: React.Dispatch<IAction>
 }
-const siteContex =React.createContext<IContextState>({state:{status:"loading",axiosInstance:axios.create({
-  baseURL:API_URL,
-  headers:{
-    Accept:'application/json',
-    'Content-Type':'application/json',
-  }
-})}});
+const siteContex =React.createContext<IContextState>({state:{status:"loading",}});
 
 export default siteContex;
