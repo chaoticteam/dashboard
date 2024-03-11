@@ -5,10 +5,12 @@ import { IUser } from "@/models";
 
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>{
   user?:IUser;
+  HandleLogout: ()=>Promise<void>
 }
 export default function Navbar(props:IProps) {
   const {
     user,
+    HandleLogout,
     ...cssProps
   } =props;
   return (
@@ -18,7 +20,7 @@ export default function Navbar(props:IProps) {
       <Avatar photo={user?.profile.photo}>
         {!!user?<ul>
           <li><Link href="/profile">Profile</Link></li>
-          <li><Link href="/profile">Sign out</Link></li>
+          <li onClick={HandleLogout}>Sign out</li>
         </ul>:
         <ul>
           <li><Link href="/profile">Sign in</Link></li>

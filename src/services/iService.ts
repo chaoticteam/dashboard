@@ -2,8 +2,8 @@ import { AxiosInstance } from "axios";
 import { IUser, IUserAuth } from "../models";
 
 export	interface IService<T> {
-		axios?: AxiosInstance;
-		baseUrl?: string;
+		// axios?: AxiosInstance;
+		// baseUrl?: string;
 		list(): Promise<T[]>;
 		detail(id:number): Promise<T>;
 		create(data:T): Promise<T>;
@@ -12,8 +12,9 @@ export	interface IService<T> {
 		listFilter?(slug:string): Promise<T[]>;
 }
 export interface IServiceAuth{
-  axios: AxiosInstance;
+  // axios: AxiosInstance;
   login(username: string,password: string):Promise<IUserAuth>;
+  logout():Promise<void>;
   getData():Promise<IUser>;
   signUp(data:IUser):Promise<IUserAuth>;
 }

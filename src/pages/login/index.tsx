@@ -1,5 +1,6 @@
 import { useAuth } from "@/hooks";
 import Form from "form-with-state";
+import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, useCallback, useEffect } from "react";
@@ -7,7 +8,7 @@ interface IUser{
   username:string;
   password: string;
 }
-export default function LoginPage(){
+export const LoginPage:NextPage=(props)=>{
   const router = useRouter()
   const {login} = useAuth();
   const handleClick = useCallback(async (data:IUser)=>{
@@ -41,10 +42,11 @@ export default function LoginPage(){
               <a>Forgot your password?</a>
             </div>
             <Form.Submit label='login' style={{backgroundColor:"var(--secondary)"}} />
-            <p>Don`t have an account yet?<Link href="/signup"> Sign up for free!</Link></p>
+            <p>Don`t have an account yet?<Link href="/signup">Sign up for free!</Link></p>
           </Form>
         </div>
       </div>
     </div>
   )
 }
+export default LoginPage;

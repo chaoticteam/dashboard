@@ -8,7 +8,7 @@ interface IProps{
   children: React.ReactNode
 }
 export function Layout({children}:IProps){
-  const {state} = useAuth();
+  const {state,logout} = useAuth();
   if (state.status == "loading"){
     return (
       <div className="layout">
@@ -21,10 +21,10 @@ export function Layout({children}:IProps){
         </div>
       )
   }
-  if (state.status == "loaded"){
+  if (!!state.user){
     return (
       <div className="layout">
-        <NavBar user={state.user} />
+        <NavBar user={state.user} HandleLogout={logout} />
         {children}
         <Footer />
       </div>

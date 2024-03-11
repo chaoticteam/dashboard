@@ -3,68 +3,59 @@ import {authService as AuthService } from "@/services";
 import { IUser } from "@/models";
 import context from "@/context/siteContext";
 import { useRouter } from "next/router";
-import getConfig from "next/config";
-
-
-const { publicRuntimeConfig } = getConfig();
-const API_URL = publicRuntimeConfig.API_URL;
+import axios from "axios";
 
 export const useAuth = () => {
   const router =useRouter();
 	const {state,dispatch} = useContext(context);
-  const authService	= useRef(new AuthService(state.axiosInstance)).current;
+  const authService	= useRef(new AuthService()).current;
   const UnAuthhorized = useCallback(()=>{
+    if (state.status== "error") return;
     dispatch && dispatch({type:"SET_STATUS_INSTANCE",payload:"error"});
-    router.push("/login");
-  },[dispatch,router])
+  },[dispatch,state.status])
 	const login= useCallback(async ({username,password}:{username: string,password: string})=>{
 		if (!dispatch) return
     dispatch({type:"SET_STATUS_INSTANCE",payload:"loading"});
 		try{
 			const {user,token} = await authService.login(username,password);
-      dispatch({type:"SET_TOKEN",payload:token||""})
 			dispatch({type:"SET_USER",payload:user})
-			localStorage.setItem("access_token",token)
+      router.push("/")
 		}catch(error){
       UnAuthhorized()
 		}
-	},[UnAuthhorized,authService,dispatch])
+	},[UnAuthhorized,authService,dispatch,router])
+	const logout= useCallback(async ()=>{
+		try{
+      await authService.logout();
+      dispatch && dispatch({type:"SET_USER"});
+      router.push("/login")
+		}catch(error){
+      UnAuthhorized()
+		}
+	},[UnAuthhorized,authService,dispatch,router])
 	const signUp= useCallback(async (data: IUser)=>{
     if (!dispatch)  return
     dispatch({type:"SET_STATUS_INSTANCE",payload:"loading"});
 		try{
-      const {user,token} = await authService.signUp(data);
-      dispatch({type:"SET_TOKEN",payload:token||""})
+      const {user} = await authService.signUp(data);
 			dispatch({type:"SET_USER",payload:user})
-			localStorage.setItem("access_token",token)
+      router.push("/")
 		}catch(error){
       UnAuthhorized()
 		}
-	},[UnAuthhorized,authService,dispatch])
-	const getUserData= useCallback(async ()=>{
-    if (!dispatch || !!state.user)  return
-    try {
-      const data =await authService.getData()
-      dispatch({type:"SET_USER",payload:data});
-    } catch (error) {
-      UnAuthhorized();
-    }
-	},[UnAuthhorized,authService,dispatch,state.user])
+	},[UnAuthhorized,authService,dispatch,router])
   useEffect(()=>{
-    if (!state.token){
-      const token = localStorage.getItem("access_token");
-      if (!token){
-        dispatch && dispatch({type:"SET_STATUS_INSTANCE",payload:"error"});
-        router.push("/login");
-        return;
-      }
-      dispatch && token && dispatch({type:"SET_TOKEN",payload:token})
-    }else{
-      getUserData()
-    }
-  },[state.token,dispatch,getUserData,router])
+    axios.get(`/auth/userdata`)
+      .then(({data})=>{
+        dispatch && dispatch({type:"SET_USER",payload:data});
+      })
+      .catch(()=>{
+        router.push("/login")
+      })
+  },[dispatch,])
 	return {
     state,
     login,
     signUp,
+    logout,
 	}}

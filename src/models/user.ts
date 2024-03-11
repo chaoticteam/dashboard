@@ -53,8 +53,8 @@ export interface IUserAuth{
 export type IUserStatus ="loading" | "loaded" | "error";
 export interface IContextState {
 	user?: IUser;
-	status: IUserStatus;
-	axiosInstance: AxiosInstance;
-  token?: string;
+	status?: IUserStatus;
+	// axiosInstance: AxiosInstance;
+  // token?: string;
 }
 

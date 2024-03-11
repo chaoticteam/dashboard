@@ -2,7 +2,7 @@ import {IUser,IUserStatus } from "@/models";
 import { AxiosInstance } from "axios";
 interface ISetUserAction {
 	type: "SET_USER";
-	payload: IUser;
+	payload?: IUser;
 }
 interface ISetAxiosAction {
 	type: "SET_TOKEN";

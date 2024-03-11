@@ -7,11 +7,11 @@ const { publicRuntimeConfig } = getConfig();
 const baseURL = publicRuntimeConfig.API_URL;
 
 export const initialState: IContextState = {
-  status:"loading",
   user: undefined,
-  axiosInstance: axios.create({
-      baseURL:baseURL,
-  }),
+  // axiosInstance: axios.create({
+  //     baseURL:baseURL,
+  //     withCredentials: true,
+  // }),
 };
 export const reducer = (state: IContextState, action:IAction ): IContextState => {
 	switch (action.type) {
@@ -21,17 +21,17 @@ export const reducer = (state: IContextState, action:IAction ): IContextState =>
 				status: "loaded",
 				user : action.payload,
 			};
-		case "SET_TOKEN":
-      state.axiosInstance.interceptors.request.use(config=>{
-        if (config.headers)
-          config.headers.Authorization =	action.payload ? `Bearer ${action.payload}` : ''
-        return config
-      })
-			return {
-				...state,
-        token:action.payload,
-				axiosInstance: state.axiosInstance,
-			};
+		// case "SET_TOKEN":
+    //   state.axiosInstance.interceptors.request.use(config=>{
+    //     if (config.headers)
+    //       config.headers.Authorization =	action.payload ? `Bearer ${action.payload}` : ''
+    //     return config
+    //   })
+		// 	return {
+		// 		...state,
+    //     token:action.payload,
+		// 		axiosInstance: state.axiosInstance,
+		// 	};
     case "SET_STATUS_INSTANCE":
       return {
         ...state,
