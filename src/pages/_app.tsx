@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	},[state,dispatch]);
   return (
     <conttext.Provider value={{state,dispatch}}>
+      <div className="background-site"></div>
       <Layout>
         <Component {...pageProps} />
       </Layout>

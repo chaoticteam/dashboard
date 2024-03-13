@@ -1,15 +1,15 @@
 import React from "react";
-import NavBar from "../NavBar";
-import { Footer, PacmanLoader } from "..";
+import { SitBar, Footer, PacmanLoader } from "..";
 import { useAuth } from "@/hooks";
-import { useRouter } from "next/router";
+import Avatar from "@/components/Avatar";
+import Link from "next/link";
 
 interface IProps{
   children: React.ReactNode
 }
 export function Layout({children}:IProps){
-  const {state,logout} = useAuth();
-  if (state.status == "loading"){
+  const {state:{status,user},logout} = useAuth();
+  if (status == "loading"){
     return (
       <div className="layout">
           <PacmanLoader />
@@ -21,13 +21,25 @@ export function Layout({children}:IProps){
         </div>
       )
   }
-  if (!!state.user){
+  if (!!user){
     return (
+    <>
+      {/* <NavBar user={state.user} HandleLogout={logout} /> */}
       <div className="layout">
-        <NavBar user={state.user} HandleLogout={logout} />
+        <SitBar />
         {children}
-        <Footer />
+        <Avatar style={{position:"absolute",top:0,right:0,height:"3rem",width:"3rem"}} photo={user?.profile.photo}>
+        {!!user?<ul>
+          <li><Link href="/profile">Profile</Link></li>
+          <li onClick={logout}>Sign out</li>
+        </ul>:
+        <ul>
+          <li><Link href="/profile">Sign in</Link></li>
+        </ul>}
+      </Avatar>
+        {/* <Footer /> */}
       </div>
+    </>
     )
   }
   return (
