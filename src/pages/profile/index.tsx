@@ -53,10 +53,10 @@ export default function Profile(){
       <div>
         <h2>Telephones</h2>
         <div style={{display:"grid",gridTemplateColumns:".5fr 1fr",alignItems:"start"}}>
-          <Form persistData onSubmit={handleAddTelephone}>
-            <Form.TextField label="Country code" name="countryCode" />
-            <Form.TextField label="Telephone" name="phoneNumber" />
-            <Form.CheckBox  name="whatsapp" />
+          <Form onSubmit={handleAddTelephone}>
+            <Form.TextField required label="Country code" name="countryCode" />
+            <Form.TextField required label="Telephone" name="phoneNumber" />
+            <Form.CheckBox  name="whatsapp" initialValue={true}/>
            <Form.Submit style={{width:"5rem"}} label='save'/>
           </Form>
           <table>

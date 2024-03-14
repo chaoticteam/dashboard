@@ -18,8 +18,8 @@ export const useProfile=()=>{
   },[dispatch,service])
   const addTelephone = useCallback(async(data:Telephone)=>{
     try {
-      await telephoneService.create(data)
-      dispatch && dispatch({type:"ADD_TELEPHONE",payload:data})
+      const telephone = await telephoneService.create(data)
+      dispatch && dispatch({type:"ADD_TELEPHONE",payload:telephone})
     } catch (error) {
       console.log(error)
     }
