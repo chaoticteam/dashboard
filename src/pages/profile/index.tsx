@@ -37,7 +37,7 @@ export default function Profile(){
           Upload new avatar
           <Form onSubmit={HandleSubmit} persistData>
             <Form.TextField label="photo" required name="photo" initialValue={user?.profile.photo} />
-            <Form.Submit  label='save' style={{backgroundColor:"var(--secondary)",width:"5rem"}} />
+            <Form.Submit style={{width:"5rem"}} label='save'/>
           </Form>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function Profile(){
           <Form.TextField label="Firs Name" name="firstName"  initialValue={user?.profile.firstName}/>
           <Form.TextField label="Last Name" name="lastName"  initialValue={user?.profile.lastName}/>
           <Form.TextArea label="Biography" name="bio"  initialValue={user?.profile.bio}/>
-          <Form.Submit label='save' style={{backgroundColor:"var\(--secondary\)",width:"5rem"}} />
+          <Form.Submit style={{width:"5rem"}} label='save'/>
         </Form>
       </div>
       <div>
@@ -57,7 +57,7 @@ export default function Profile(){
             <Form.TextField label="Country code" name="countryCode" />
             <Form.TextField label="Telephone" name="phoneNumber" />
             <Form.CheckBox  name="whatsapp" />
-           <Form.Submit label='save' style={{backgroundColor:"var\(--secondary\)",width:"5rem"}} />
+           <Form.Submit style={{width:"5rem"}} label='save'/>
           </Form>
           <table>
               <tr>
@@ -87,7 +87,7 @@ export default function Profile(){
           <Form.TextField label="Instagram" name="instagram"  initialValue={user?.profile.instagram}/>
           <Form.TextField label="Youtube" name="youtube"  initialValue={user?.profile.youtube}/>
           <Form.TextField label="Web Site" name="website"  initialValue={user?.profile.website}/>
-          <Form.Submit label='save' style={{backgroundColor:"var\(--secondary\)",width:"5rem"}} />
+          <Form.Submit style={{width:"5rem"}} label='save'/>
         </Form>
       </div>
       <div>
@@ -97,7 +97,7 @@ export default function Profile(){
           <Form.TextField label="skills" name="skills"  initialValue={user?.profile.skills}/>
           <Form.TextField label="Languages" name="Languages"  initialValue={user?.profile.Languages}/>
           <Form.TextField label="Hobbies" name="Hobbies"  initialValue={user?.profile.Hobbies}/>
-          <Form.Submit label='save' style={{backgroundColor:"var\(--secondary\)",width:"5rem"}} />
+          <Form.Submit style={{width:"5rem"}} label='save'/>
         </Form>
       </div>
       <style jsx>{`

@@ -1287,10 +1287,10 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-form-with-state@^0.1.50:
-  version "0.1.50"
-  resolved "https://registry.yarnpkg.com/form-with-state/-/form-with-state-0.1.50.tgz#ddd4555d0f3f10c5550044030950414bb835fdf2"
-  integrity sha512-ulHaUZTZD34VWCDr1j9PMA8Vtzw9f0p8w2KYZeVkuwU8oh1IQu12V/cspsgCn7IVXtLpRit9JBjbeeEvNG7d3w==
+form-with-state@^0.1.53:
+  version "0.1.53"
+  resolved "https://registry.yarnpkg.com/form-with-state/-/form-with-state-0.1.53.tgz#c3d5ccb749a9211384fae0195fa971e5bdf9441a"
+  integrity sha512-H4UvTd3Eezec132ulkj3RLSQ61iYSHhIKmYp1kfwi6L0tWmDaeuq+8VL/NSznFjrqfMyEU5Z4qtZ8yFWqlPGtg==
   dependencies:
     "@testing-library/react" "^14.2.1"
 

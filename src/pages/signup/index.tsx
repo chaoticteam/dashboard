@@ -41,7 +41,7 @@ export default function SignUp() {
               <Form.PasswordField label='password' required name='password' />
               <Form.PasswordField label='confirm password' required name='confirmPassword' />
             </div>
-            <Form.Submit label='sign up' style={{backgroundColor:"var(--secondary)"}} />
+            <Form.Submit label='sign up'/>
             <p className="signin">Already have an acount?<Link href="/login">login</Link> </p>
           </Form>
         </div>

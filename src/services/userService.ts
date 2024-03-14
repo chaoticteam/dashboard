@@ -4,6 +4,9 @@ import { IService } from "@/services/";
 import axios from "axios";
 
 export class UserService implements IService<IUser> {
+  partialUpdate(id: number, data: Dictionary): Promise<IUser> {
+    throw new Error("Method not implemented.");
+  }
   async getUserNames(): Promise<string[]> {
     const response = await	axios.get(`/users`)
     return response.data;

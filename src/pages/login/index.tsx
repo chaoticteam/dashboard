@@ -41,7 +41,7 @@ export const LoginPage:NextPage=(props)=>{
             <div style={{display:"flex",justifyContent:"flex-end",margin:".3rem"}}>
               <a>Forgot your password?</a>
             </div>
-            <Form.Submit label='login' style={{backgroundColor:"var(--secondary)"}} />
+            <Form.Submit label='login'/>
             <p>Don`t have an account yet?<Link href="/signup">Sign up for free!</Link></p>
           </Form>
         </div>
