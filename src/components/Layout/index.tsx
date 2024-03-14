@@ -28,7 +28,7 @@ export function Layout({children}:IProps){
       <div className="layout">
         <SitBar />
         {children}
-        <Avatar style={{position:"absolute",top:0,right:0,height:"3rem",width:"3rem"}} photo={user?.profile.photo}>
+        <Avatar style={{position:"absolute",top:"1rem",right:"1rem",height:"3rem",width:"3rem"}} photo={user?.profile.photo}>
         {!!user?<ul>
           <li><Link href="/profile">Profile</Link></li>
           <li onClick={logout}>Sign out</li>
@@ -43,7 +43,7 @@ export function Layout({children}:IProps){
     )
   }
   return (
-    <div className="layout">
+    <div>
       {children}
     </div>
   )

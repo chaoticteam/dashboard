@@ -1,4 +1,3 @@
-import { AxiosInstance } from "axios";
 export interface IUser {
 	id: number;
 	userName: string;
@@ -15,8 +14,6 @@ export interface Profile {
 	lastName: string;
 	photo: string;
 	bio: string;
-
-	jobs: string;
 
 	linkedin: string;
 	github: string;
@@ -38,13 +35,13 @@ export interface Profile {
   Languages: string;
   Hobbies: string;
 
-telephone: {
-	id: number;
-	phoneNumber: string;
-	whatsapp: boolean;
-	countryCode: string;
-}[];
-
+  telephone: Telephone[];
+}
+export interface Telephone {
+  id: number;
+  phoneNumber: string;
+  whatsapp: boolean;
+  countryCode: string;
 }
 export interface IUserAuth{
 	user: IUser;

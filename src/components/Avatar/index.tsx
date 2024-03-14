@@ -28,6 +28,7 @@ export default function Avatar(props:IProps){
       <menu style={{display:open?"initial":"none"}}>
         {children}
       </menu>
+      <div className={styles.background} style={{display:open?"initial":"none"}} onClick={()=>setOpen(!open)}></div>
     </div>
   )
 

@@ -1,12 +1,9 @@
-import {IUser, IUserAuth} from "@/models";
+import {IUser, IUserAuth, Profile} from "@/models";
+import { Dictionary } from "@/models/utils";
 import {IServiceAuth} from "@/services/iService";
 import axios, { AxiosInstance } from "axios";
 
 export class authService implements IServiceAuth{
-  // axios: AxiosInstance;
-	// constructor({ axiosInstance }: { axiosInstance: AxiosInstance; }){
-  // 	this.axios = axiosInstance
-  // }
   async login(username: string, password: string): Promise<IUserAuth> {
     const response = await axios.post(`/auth/login`,{
       username,
@@ -25,6 +22,10 @@ export class authService implements IServiceAuth{
 		const response = await axios.post(`/auth/signup`,data)
 		return response.data;
 	}
+  async partialUpdate(data: Dictionary): Promise<IUser> {
+    const response = await axios.patch(`/profile`,data)
+    return response.data;
+  }
 }
 
 export default authService;

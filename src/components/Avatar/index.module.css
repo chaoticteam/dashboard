@@ -6,7 +6,7 @@
   right: 30px;
   top: 3rem;
   background-color: var(--primary);
-  z-index: 1;
+  z-index: 2;
   margin: 0;
   padding: 0;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 .5rem .5rem 0 rgba(0,0,0,0.19);
@@ -31,4 +31,13 @@
 .avatar menu ul li:hover {
   background-color: #00000069;
   color: white;
+}
+.background{
+  z-index: 1;
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000071;
 }

@@ -50,9 +50,10 @@ export const useAuth = () => {
         dispatch && dispatch({type:"SET_USER",payload:data});
       })
       .catch(()=>{
+        if (!/login|signup/.test(router.asPath))
         router.push("/login")
       })
-  },[dispatch,])
+  },[])
 	return {
     state,
     login,
