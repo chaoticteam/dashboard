@@ -31,7 +31,7 @@ export function Layout({children}:IProps){
         <Avatar style={{position:"absolute",top:"1rem",right:"1rem",height:"3rem",width:"3rem"}} photo={user?.profile.photo}>
         {!!user?<ul>
           <li><Link href="/profile">Profile</Link></li>
-          <li onClick={logout}>Sign out</li>
+          <li onClick={logout}><a>Sign out</a></li>
         </ul>:
         <ul>
           <li><Link href="/profile">Sign in</Link></li>

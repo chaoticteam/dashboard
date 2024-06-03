@@ -20,6 +20,7 @@ export const useAuth = () => {
 			const {user,token} = await authService.login(username,password);
 			dispatch({type:"SET_USER",payload:user})
       router.push("/")
+      return token;
 		}catch(error){
       UnAuthhorized()
 		}
@@ -37,9 +38,10 @@ export const useAuth = () => {
     if (!dispatch)  return
     dispatch({type:"SET_STATUS_INSTANCE",payload:"loading"});
 		try{
-      const {user} = await authService.signUp(data);
+      const {user,token} = await authService.signUp(data);
 			dispatch({type:"SET_USER",payload:user})
       router.push("/")
+      return token;
 		}catch(error){
       UnAuthhorized()
 		}
@@ -53,7 +55,7 @@ export const useAuth = () => {
         if (!/login|signup/.test(router.asPath))
         router.push("/login")
       })
-  },[])
+  },[dispatch,router])
 	return {
     state,
     login,

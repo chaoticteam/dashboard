@@ -4,18 +4,26 @@ import { useAuth } from '@/hooks';
 import { IUserSignup } from '@/models';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
 export default function SignUp() {
+
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect")
   const router = useRouter()
 	const {signUp} = useAuth()
   const handleClick = useCallback(async (data:IUserSignup)=>{
     try {
-      await signUp(data)
-      router.push("/")
+      const token = await signUp(data)
+      if (!!redirect){
+        window.location.replace(`${redirect}?token=${token}`)
+      }else{
+        router.push("/")
+      }
     } catch (error) {
       console.log("failed signup")
     }
-  },[signUp,router])
+  },[signUp,router,redirect])
 	return (
     <div className='content'>
       <div className='panel'>
@@ -42,7 +50,7 @@ export default function SignUp() {
               <Form.PasswordField label='confirm password' required name='confirmPassword' />
             </div>
             <Form.Submit label='sign up'/>
-            <p className="signin">Already have an acount?<Link href="/login">login</Link> </p>
+            <p className="signin">Already have an acount?<Link href={`/login/?redirect=${redirect}`}>login</Link> </p>
           </Form>
         </div>
       </div>

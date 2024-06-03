@@ -16,7 +16,7 @@
   list-style-type: none;
   padding: 0;
 }
-.avatar menu ul li{
+.avatar menu ul li a{
   display: flex;
   flex-direction: row;
   padding: 1rem 1rem;

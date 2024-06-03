@@ -2,23 +2,30 @@ import { useAuth } from "@/hooks";
 import Form from "form-with-state";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { CSSProperties, useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 interface IUser{
   username:string;
   password: string;
 }
 export const LoginPage:NextPage=(props)=>{
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect")
   const router = useRouter()
   const {login} = useAuth();
   const handleClick = useCallback(async (data:IUser)=>{
     try {
-      await login(data)
-      router.push("/")
+      const token = await login(data)
+      if (!!redirect){
+        window.location.replace(`${redirect}?token=${token}`)
+      }else{
+        router.push("/")
+      }
     } catch (error) {
       console.log("failed login")
     }
-  },[login,router])
+  },[login,router,redirect])
   return (
     <div className='content'>
       <div className='panel'>
@@ -42,7 +49,7 @@ export const LoginPage:NextPage=(props)=>{
               <a>Forgot your password?</a>
             </div>
             <Form.Submit label='login'/>
-            <p>Don`t have an account yet?<Link href="/signup">Sign up for free!</Link></p>
+            <p>Don`t have an account yet?<Link href={`/signup/?redirect=${redirect}`}>Sign up for free!</Link></p>
           </Form>
         </div>
       </div>
