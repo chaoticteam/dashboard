@@ -13,6 +13,7 @@ export const initialState: IContextState = {
     headers:{
       "Accept" : 'application/json',
       'Content-Type' : 'application/json',
+      'ProXy-AuthoriZation': 'Rear Test',
     },
     withCredentials: true,
   })
