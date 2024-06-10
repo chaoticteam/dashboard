@@ -1,5 +1,5 @@
 import React from "react";
-import { SitBar, Footer, PacmanLoader } from "..";
+import { SitBar, PacmanLoader } from "..";
 import { useAuth } from "@/hooks";
 import Avatar from "@/components/Avatar";
 import Link from "next/link";
@@ -34,7 +34,7 @@ export function Layout({children}:IProps){
             <li onClick={logout}><a>Sign out</a></li>
           </ul>:
           <ul>
-            <li><Link href="/profile">Sign in</Link></li>
+            <li><Link href="/login">Sign in</Link></li>
           </ul>}
         </Avatar>
       </div>

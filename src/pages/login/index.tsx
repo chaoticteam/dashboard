@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 interface IUser{
   username:string;
   password: string;
@@ -14,16 +14,18 @@ export const LoginPage:NextPage=(props)=>{
   const redirect = searchParams.get("redirect")
   const router = useRouter()
   const {login} = useAuth();
+  const [errorMSG,setErrorMSG] = useState("");
   const handleClick = useCallback(async (data:IUser)=>{
+    setErrorMSG("")
     try {
-      const token = await login(data)
+      const token = await login(data);
       if (!!redirect){
         window.location.replace(`${redirect}?token=${token}`)
       }else{
         router.push("/")
       }
     } catch (error) {
-      console.log("failed login")
+      setErrorMSG("username or password incorrect!!!")
     }
   },[login,router,redirect])
   return (
@@ -42,9 +44,10 @@ export const LoginPage:NextPage=(props)=>{
         </div>
       <div>
         <div>
-          <Form onSubmit={handleClick}>
+          <Form onSubmit={handleClick} persistData>
             <Form.TextField label='user name' required name='username' />
             <Form.PasswordField required name='password'/>
+            <>{!!errorMSG&&<span style={{color:"#E66070"}}>{errorMSG}</span>}</>
             <div style={{display:"flex",justifyContent:"flex-end",margin:".3rem"}}>
               <a>Forgot your password?</a>
             </div>

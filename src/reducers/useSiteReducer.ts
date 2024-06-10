@@ -1,8 +1,21 @@
 import { IContextState } from "@/models/user";
 import { IAction } from "@/reducers/types";
+import axios from "axios";
+import getConfig from "next/config";
+
+const {publicRuntimeConfig} = getConfig()
+const API_URL = publicRuntimeConfig.API_URL
 
 export const initialState: IContextState = {
   user: undefined,
+  axiosInstance: axios.create({
+    baseURL: API_URL,
+    headers:{
+      "Accept" : 'application/json',
+      'Content-Type' : 'application/json',
+    },
+    withCredentials: true,
+  })
 };
 export const reducer = (state: IContextState, action:IAction ): IContextState => {
 	switch (action.type) {
@@ -54,6 +67,11 @@ export const reducer = (state: IContextState, action:IAction ): IContextState =>
         ...state,
         user:undefined,
         status:action.payload
+      }
+    case "SET_STATUS_AXIOSINSTANCE":
+      return {
+        ...state,
+        axiosInstance: action.payload,
       }
 		default:
 			return state;

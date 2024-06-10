@@ -1,4 +1,5 @@
 import {IUser,IUserStatus, Profile, Telephone } from "@/models";
+import { AxiosInstance } from "axios";
 interface ISetUserAction {
 	type: "SET_USER";
 	payload?: IUser;
@@ -19,7 +20,11 @@ interface ISetStatusAction {
 	type: "SET_STATUS_INSTANCE";
 	payload: IUserStatus;
 }
+interface ISetAxiosInstance {
+	type: "SET_STATUS_AXIOSINSTANCE";
+	payload: AxiosInstance;
+}
 
 
-export type IAction = ISetUserAction | ISetStatusAction | ISetProfileAction |IAddTelephoneAction |IRMTelephoneAction;
+export type IAction = ISetUserAction | ISetStatusAction | ISetProfileAction |IAddTelephoneAction |IRMTelephoneAction | ISetAxiosInstance;
 export default IAction;

@@ -1,14 +1,18 @@
 import { IUser } from "@/models";
 import { Dictionary } from "@/models/utils";
 import { IService } from "@/services/";
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 
 export class UserService implements IService<IUser> {
+  axiosInstance: AxiosInstance;
+  constructor(axiosInstance: AxiosInstance){
+    this.axiosInstance = axiosInstance
+  }
   partialUpdate(id: number, data: Dictionary): Promise<IUser> {
     throw new Error("Method not implemented.");
   }
   async getUserNames(): Promise<string[]> {
-    const response = await	axios.get(`/users`)
+    const response = await this.axiosInstance.get(`/users`)
     return response.data;
   }
   list(): Promise<IUser[]> {

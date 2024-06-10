@@ -4,49 +4,30 @@ import type { AppContext, AppInitialProps, AppProps } from "next/app";
 import conttext from "@/context/siteContext"
 import {initialState, reducer} from "@/reducers"
 import {Layout} from "@/components"
-import axios from "axios";
-import getConfig from "next/config";
 import App from "next/app";
+import { useRouter } from "next/router";
 
-const {publicRuntimeConfig} = getConfig()
-const API_URL = publicRuntimeConfig.API_URL
 
-interface AppOwnProps {
-  layout: boolean;
-}
-
-export function CustomApp({ Component, pageProps, layout }: AppProps & AppOwnProps) {
+export function CustomApp({ Component, pageProps }: AppProps) {
+  const {route} = useRouter();
   const [state,dispatch]= useReducer(reducer,initialState);
-  axios.defaults.withCredentials = true
-  axios.defaults.baseURL = API_URL
 	useMemo(()=>{
 		return {state,dispatch}
 	},[state,dispatch]);
-  if (layout){
-    return (
-      <conttext.Provider value={{state,dispatch}}>
-        <div className="background-site"></div>
+  let content = (
+    <Layout>
         <Component {...pageProps} />
-      </conttext.Provider>
-    )
+      </Layout>
+  )
+  if (/(\/login|\/signup)/.test(route)){
+    content = (<Component {...pageProps} />)
   }
   return (
     <conttext.Provider value={{state,dispatch}}>
       <div className="background-site"></div>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {content}
     </conttext.Provider>
   )
-}
-
-CustomApp.getInitialProps = async (
-  context: AppContext
-): Promise<AppOwnProps & AppInitialProps> => {
-  const ctx = await App.getInitialProps(context);
-  let layout: boolean;
-  layout = /(\/login|\/signup)/.test(context.router.route);
-  return { ...ctx, layout }
 }
 
 export default CustomApp;

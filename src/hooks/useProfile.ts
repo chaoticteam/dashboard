@@ -5,9 +5,9 @@ import { Dictionary } from "@/models/utils"
 import { Telephone } from "@/models"
 
 export const useProfile=()=>{
-  const {dispatch} = useContext(context)
-  const service = useRef(new authService()).current
-  const telephoneService = useRef(new TelephoneService()).current
+  const {state,dispatch} = useContext(context)
+  const service = useRef(new authService(state.axiosInstance)).current
+  const telephoneService = useRef(new TelephoneService(state.axiosInstance)).current
   const partialUpdate = useCallback(async(data:Dictionary)=>{
     try {
       const profile = await service.partialUpdate(data);

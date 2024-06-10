@@ -1,3 +1,5 @@
+import { AxiosInstance } from "axios";
+
 export interface IUser {
 	id: number;
 	userName: string;
@@ -51,7 +53,7 @@ export type IUserStatus ="loading" | "loaded" | "error";
 export interface IContextState {
 	user?: IUser;
 	status?: IUserStatus;
-	// axiosInstance: AxiosInstance;
+	axiosInstance: AxiosInstance;
   // token?: string;
 }
 
