@@ -104,7 +104,16 @@ a {
   display: grid;
   grid-template-columns: auto 1fr;
   min-height: 100vh;
-  padding: 2rem 0;
+  padding: 0;
+  & .menu {
+    margin: 2rem 1rem;
+  }
+  & .page {
+    position: relative;
+    overflow-y: scroll;
+    height: 100vh;
+    padding-top: 1rem;
+  }
 }
 
 footer{

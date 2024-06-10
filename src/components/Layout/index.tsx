@@ -16,35 +16,29 @@ export function Layout({children}:IProps){
           <style jsx>{`
           .layout{
             grid-template-rows: 1fr;
+            grid-template-columns: 1fr;
           }
           `}</style>
         </div>
       )
   }
-  if (!!user){
-    return (
-    <>
-      {/* <NavBar user={state.user} HandleLogout={logout} /> */}
-      <div className="layout">
-        <SitBar />
+  return (
+  <>
+    <div className="layout">
+      <SitBar />
+      <div className="page">
         {children}
         <Avatar style={{position:"absolute",top:"1rem",right:"1rem",height:"3rem",width:"3rem"}} photo={user?.profile.photo}>
-        {!!user?<ul>
-          <li><Link href="/profile">Profile</Link></li>
-          <li onClick={logout}><a>Sign out</a></li>
-        </ul>:
-        <ul>
-          <li><Link href="/profile">Sign in</Link></li>
-        </ul>}
-      </Avatar>
-        {/* <Footer /> */}
+          {!!user?<ul>
+            <li><Link href="/profile">Profile</Link></li>
+            <li onClick={logout}><a>Sign out</a></li>
+          </ul>:
+          <ul>
+            <li><Link href="/profile">Sign in</Link></li>
+          </ul>}
+        </Avatar>
       </div>
-    </>
-    )
-  }
-  return (
-    <div>
-      {children}
     </div>
+  </>
   )
 }

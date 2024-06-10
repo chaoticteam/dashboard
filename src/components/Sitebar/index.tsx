@@ -20,7 +20,6 @@ export const SitBar=()=>{
       .menu{
         display: grid;
         grid-template-rows: 1fr 2rem;
-        margin:0 1rem;
         padding: .75rem;
         height: 34rem;
         border-radius: .7rem;
