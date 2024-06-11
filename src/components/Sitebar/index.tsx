@@ -17,27 +17,27 @@ export const SitBar=()=>{
         <li><a onClick={()=>setColapsed(!colapsed)}> <Arrow style={{transform:colapsed?"rotate(180deg)":"",transition: "transform 1s"}} />colapsed</a></li>
       </ul>
     <style jsx>{`
-      .menu{
+      .menu {
         display: grid;
         grid-template-rows: 1fr 2rem;
         padding: .75rem;
         height: 34rem;
         border-radius: .7rem;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 .5rem .5rem 0 rgba(0,0,0,0.19);
-        background-color: var(--secondary);
+        background-color: var(--primary);
         overflow: hidden;
       }
-      .menu-colapsed{
+      .menu-colapsed {
         width: 3.5rem;
       }
-      .menu-normal{
+      .menu-normal {
         z-index: inherit;
         width: fit-content;
       }
-      .menu:is(.menu-colapsed) > ul > li > a svg:first-child{
+      .menu:is(.menu-colapsed) > ul > li > a svg:first-child {
         transform: rotate(180deg);
       }
-      menu{
+      menu {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -46,9 +46,14 @@ export const SitBar=()=>{
         padding: 0;
         width: 100%
       }
-      li{
+      li {
         align-items: center;
         margin: .5rem 0;
+      }
+      `}</style>
+    <style>{`
+      svg {
+        margin-right: 1rem;
       }
     `}</style>
     </div>

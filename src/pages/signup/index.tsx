@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import Form from 'form-with-state';
 import { useAuth } from '@/hooks';
-import { IUserSignup } from '@/models';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
+import styles from "./index.module.css"
 
 export default function SignUp() {
 
@@ -12,7 +12,7 @@ export default function SignUp() {
   const redirect = searchParams.get("redirect")
   const router = useRouter()
 	const {signUp} = useAuth()
-  const handleClick = useCallback(async (data:IUserSignup)=>{
+  const handleClick = useCallback(async (data:any,_:any)=>{
     try {
       const token = await signUp(data)
       if (!!redirect){
@@ -40,27 +40,18 @@ export default function SignUp() {
         </div>
       <div>
         <div>
-          <Form onSubmit={handleClick}>
-            <div className='signup'>
-              <Form.TextField label='First Name' required name='firstName' />
-              <Form.TextField label='Last Name' required name='lastName' />
-              <Form.TextField label='user name' required name='userName' />
-              <Form.TextField label='Email' required name='email' />
-              <Form.PasswordField label='password' required name='password' />
-              <Form.PasswordField label='confirm password' required name='confirmPassword' />
-            </div>
-            <Form.Submit label='sign up'/>
-            <p className="signin">Already have an acount?<Link href={`/login/?redirect=${redirect}`}>login</Link> </p>
+          <Form className={styles.signup} initialState={{}} onSubmit={handleClick}>
+            <Form.TextField label='First Name' required name='firstName' />
+            <Form.TextField label='Last Name' required name='lastName' />
+            <Form.TextField label='user name' required name='userName' />
+            <Form.TextField label='Email' required name='email' />
+            <Form.PasswordField label='password' required name='password' />
+            <Form.PasswordField label='confirm password' required name='confirmPassword' />
+            <Form.Submit name='signup' label='sign up'/>
+            <p className="help-text">Already have an acount?<Link href={`/login/?redirect=${redirect}`}>login</Link> </p>
           </Form>
         </div>
       </div>
-      <style jsx>{`
-      .signup{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-content: start;
-      }
-      `}</style>
     </div>
 	);
 }

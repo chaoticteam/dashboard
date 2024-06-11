@@ -1,0 +1,3 @@
+.form label button::after {
+  background-color: var(--secondary);
+}

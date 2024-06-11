@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
+import styles from "./index.module.css"
 interface IUser{
   username:string;
   password: string;
@@ -15,7 +16,7 @@ export const LoginPage:NextPage=(props)=>{
   const router = useRouter()
   const {login} = useAuth();
   const [errorMSG,setErrorMSG] = useState("");
-  const handleClick = useCallback(async (data:IUser)=>{
+  const handleClick = useCallback(async (data:any,_: any)=>{
     setErrorMSG("")
     try {
       const token = await login(data);
@@ -44,15 +45,15 @@ export const LoginPage:NextPage=(props)=>{
         </div>
       <div>
         <div>
-          <Form onSubmit={handleClick} persistData>
+          <Form className={styles.login} initialState={{}} onSubmit={handleClick} persistData>
             <Form.TextField label='user name' required name='username' />
             <Form.PasswordField required name='password'/>
             <>{!!errorMSG&&<span style={{color:"#E66070"}}>{errorMSG}</span>}</>
-            <div style={{display:"flex",justifyContent:"flex-end",margin:".3rem"}}>
+            <div style={{gridArea:"text-info",display:"flex",justifyContent:"flex-end",margin:".3rem"}}>
               <a>Forgot your password?</a>
             </div>
-            <Form.Submit label='login'/>
-            <p>Don`t have an account yet?<Link href={`/signup/?redirect=${redirect}`}>Sign up for free!</Link></p>
+            <Form.Submit className={styles.submit} name='login'/>
+            <p style={{gridArea:"text-info-2"}}>Don`t have an account yet?<Link href={`/signup/?redirect=${redirect}`}>Sign up for free!</Link></p>
           </Form>
         </div>
       </div>

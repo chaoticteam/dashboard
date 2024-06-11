@@ -1,0 +1,15 @@
+
+.login {
+  --primary--bg: #055c64;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "username username"
+    "password password"
+    "text-info text-info"
+    "login login"
+    "text-info-2 text-info-2";
+}
+.submit button::after{
+  background-color: var(--secondary);
+}

@@ -1,0 +1,19 @@
+
+.signup {
+  --primary--bg: #055c64;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "firstName lastName"
+    "userName userName"
+    "email email"
+    "password password"
+    "confirmPassword confirmPassword"
+    "signup signup"
+    "help-text help-text";
+}
+.help-text {grid-area: help-text;}
+
+.signup label button::after{
+  background-color: var(--secondary);
+}

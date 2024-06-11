@@ -7,11 +7,11 @@ body {
 }
 
 :root{
-	--primary: #fff;
+	--primary: #0a8dca;
 	--secondary: #07838F;
 	--tertiary: #EB9009;
 	--quaternary: #EB7309;
-	--background: #dbdbdb00;
+	--background: #ffffff00;
 }
 
 .primary {
@@ -185,7 +185,6 @@ a{
 svg{
   width: 1.5rem;
   height: 1.5rem;
-  margin-right:1rem;
 }
 
 .background-site{
@@ -208,7 +207,7 @@ svg{
   box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.9);
   min-width: 850px;
   width: 70vw;
-  height: 59vh;
+  height: 70vh;
 }
 .panel{
   display: flex;
@@ -274,3 +273,15 @@ svg{
 .error-image-500 {
   background-image: url(/assets/500.svg);
 }
+
+form[class^="form-"] {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem;
+}
+/* label {
+  outline: none !important;
+}
+input[type="checkbox"] {
+  margin: .8rem !important;
+} */
