@@ -274,7 +274,7 @@ svg{
   background-image: url(/assets/500.svg);
 }
 
-form[class^="form-"] {
+form[class*="form-"] {
   display: grid;
   gap: 1rem;
   margin: 1rem;
