@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useRef } from "react";
-import {authService as AuthService } from "@/services";
+import {AuthService } from "@/services";
 import { IUser } from "@/models";
 import context from "@/context/siteContext";
 import { useRouter } from "next/router";

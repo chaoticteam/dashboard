@@ -1,12 +1,12 @@
 import { useCallback, useContext, useRef } from "react"
 import context from "@/context/siteContext"
-import { TelephoneService, authService } from "@/services/"
+import { TelephoneService, AuthService } from "@/services/"
 import { Dictionary } from "@/models/utils"
 import { Telephone } from "@/models"
 
 export const useProfile=()=>{
   const {state,dispatch} = useContext(context)
-  const service = useRef(new authService(state.axiosInstance)).current
+  const service = useRef(new AuthService(state.axiosInstance)).current
   const telephoneService = useRef(new TelephoneService(state.axiosInstance)).current
   const partialUpdate = useCallback(async(data:Dictionary)=>{
     try {

@@ -100,6 +100,7 @@ a {
   height: 3rem;
 }
 .layout{
+  position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -109,10 +110,11 @@ a {
     margin: 2rem 1rem;
   }
   & .page {
-    position: relative;
     overflow-y: scroll;
     height: 100vh;
-    padding-top: 1rem;
+    padding-top: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 1rem;
   }
 }
 
