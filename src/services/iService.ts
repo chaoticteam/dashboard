@@ -10,7 +10,7 @@ export	interface IService<T> {
   update(id:number, data:T): Promise<T>;
   partialUpdate(id:number, data:Dictionary|T): Promise<T>;
   delete(id:number): Promise<void>;
-  listFilter?(slug:string): Promise<T[]>;
+  listFilter?(slug?:string): Promise<T[]>;
 }
 export interface IServiceAuth{
   axiosInstance: AxiosInstance;

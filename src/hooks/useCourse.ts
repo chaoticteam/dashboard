@@ -14,7 +14,6 @@ export const useCourse=()=>{
   },[service,setCourses])
 
   const CreateCourse = useCallback(async(data: any)=>{
-    console.log(data)
     await service.create(data);
   },[service])
 

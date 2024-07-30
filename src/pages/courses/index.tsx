@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { DataTable } from "@/components";
 import { useCourse } from "@/hooks";
 import { ICourse } from "@/models";
-import { Modal } from "@/components/Modal";
+import { Modal } from "@/components";
 import { useRouter } from "next/router";
 import Form from "form-with-state";
 import styled from "styled-components";

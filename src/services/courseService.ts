@@ -6,7 +6,7 @@ import { AxiosInstance } from "axios";
 export class CourseService implements IService<ICourse> {
   axiosInstance: AxiosInstance;
 
-  constructor (axiosInstance: AxiosInstance,username?: string){
+  constructor (axiosInstance: AxiosInstance){
     this.axiosInstance = axiosInstance;
   }
   async list(): Promise<ICourse[]> {

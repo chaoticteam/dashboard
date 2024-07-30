@@ -5,5 +5,5 @@ export interface IProject {
   image: string ;
   url: string ;
   startDate: Date;
-  endDate: Date;
+  endDate?: Date;
 }
