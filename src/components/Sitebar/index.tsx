@@ -24,7 +24,6 @@ export const SitBar=()=>{
         display: grid;
         grid-template-rows: 1fr 2rem;
         padding: .75rem;
-        height: 34rem;
         border-radius: .7rem;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 .5rem .5rem 0 rgba(0,0,0,0.19);
         background-color: var(--primary);
