@@ -1,9 +1,9 @@
 import {IUser, IUserAuth, Profile} from "@/models";
 import { Dictionary } from "@/models/utils";
 import {IServiceAuth} from "@/services/iService";
-import axios, { AxiosInstance } from "axios";
+import { AxiosInstance } from "axios";
 
-export class authService implements IServiceAuth{
+export class AuthService implements IServiceAuth{
   axiosInstance: AxiosInstance;
   constructor (axiosInstance: AxiosInstance){
     this.axiosInstance = axiosInstance;
@@ -32,4 +32,4 @@ export class authService implements IServiceAuth{
   }
 }
 
-export default authService;
+export default AuthService;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { CSSProperties, useState } from "react";
-import { Arrow, Dashboard } from "..";
+import { Arrow, Dashboard, EosIconsProjectOutlined, HugeiconsCourse, MaterialSymbolsGalleryThumbnailOutline } from "..";
 
 interface IProps extends CSSProperties{
 
@@ -12,6 +12,9 @@ export const SitBar=()=>{
     <div className={`menu menu-${colapsed?"colapsed":"normal"}`}>
       <menu>
         <li><Link href="/"><Dashboard />Dashboard</Link></li>
+        <li><Link href="/courses"><HugeiconsCourse />Courses</Link></li>
+        <li><Link href="/projects"><EosIconsProjectOutlined />Projects</Link></li>
+        <li><Link href="/galleries"><MaterialSymbolsGalleryThumbnailOutline />Galleries</Link></li>
       </menu>
       <ul>
         <li><a onClick={()=>setColapsed(!colapsed)}> <Arrow style={{transform:colapsed?"rotate(180deg)":"",transition: "transform 1s"}} />colapsed</a></li>

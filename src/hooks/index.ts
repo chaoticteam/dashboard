@@ -1,1 +1,5 @@
 export * from "./useAuth"
+export * from "./useProfile"
+export * from "./useCourse"
+export * from "./useProject"
+export * from "./useGallery"
